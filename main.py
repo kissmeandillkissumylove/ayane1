@@ -3,6 +3,8 @@ import threading
 import time
 from tkinter import * #tkinter for interface
 from tkinter import ttk
+#PATHS============================================================
+skill_file = "data.txt"
 #FONTS============================================================
 font = "verdana 8"
 #COLORS===========================================================
@@ -36,10 +38,10 @@ class Stopwatch:
 	@classmethod
 	def _stopwatch(cls):
 		while cls._running_stopwatch:
-			time.sleep(1)
+			time.sleep(0.1)
 			tmp = time.gmtime(cls._elapsed)
 			label_display_stopwatch.configure(text=time.strftime("%H.%M.%S", tmp))
-			cls._elapsed += 1
+			cls._elapsed += 0.1
 	@classmethod
 	def start_stopwatch(cls):
 		button_pause_stopwatch.configure(state="normal", bg=black)
@@ -75,7 +77,7 @@ if __name__ == "__main__":
 	window.iconbitmap("icon.ico")
 	background = PhotoImage(file="background.png")
 	bg_label = Label(image=background, border=0).place(x=0, y=0)
-	#TIMER==========================================================
+	#STOPWATCH=====================================================
 	label_display_stopwatch = Label(
 		master=window,
 		font=font,
@@ -130,6 +132,16 @@ if __name__ == "__main__":
 		command=Stopwatch.stop_stopwatch,
 	)
 	button_stop_stopwatch.place(x=250, y=20, width=50, height=20)
+	#SKILL LIST=======================================================
+	label_skill_list = Label(
+		master=window,
+		text="okay",
+		font=font,
+		bg=black,
+		bd=1,
+		fg=biege,
+	)
+	label_skill_list.place(x=150, y=41, width=150, height=359)
 	#CHANGE WINDOW CLOSING PROTOCOL==================================
 	window.protocol("WM_DELETE_WINDOW", close_window)
 	#UPDATE DISPLAY==================================================
